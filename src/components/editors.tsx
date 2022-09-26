@@ -5,16 +5,18 @@ import "ace-builds/src-noconflict/mode-assembly_x86";
 import "ace-builds/src-noconflict/theme-tomorrow_night_bright";
 import "ace-builds/src-noconflict/theme-dracula";
 import "ace-builds/src-noconflict/ext-language_tools";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import init, { compile } from "wacc_32";
 
 import { ReactTerminal } from "react-terminal";
 import { Grid, GridItem, Stack } from "@chakra-ui/react";
 
 export default function Editors() {
 
-  const [waccText, setWaccText] = useState("")
-  const [assemblyText, setAssemblyText] = useState("")
+  const [waccText, setWaccText] = useState("# write your .wacc code here!")
+  const [assemblyText, setAssemblyText] = useState("assembly output will be displayed here.")
   const [terminalText, setTerminalText] = useState("")
+
 
 
   /*
@@ -33,8 +35,21 @@ export default function Editors() {
 
   */
 
+  const callCompile = () => {
+
+    init().then(() => {
+      const output = compile(waccText, false)
+      setAssemblyText(output.asm_output)
+      setTerminalText(output.terminal_output)
+    })
+
+    return terminalText
+         
+  }
+
   const commands = {
     whoami: "rushil",
+    compile: callCompile(),
   };
 
   return (
@@ -51,6 +66,7 @@ export default function Editors() {
 
       <GridItem rowSpan={2} colSpan={[2, 1]}>
         <AceEditor
+          value={waccText}
           mode="julia"
           theme="dracula"
           name="Some Editor"
@@ -58,6 +74,7 @@ export default function Editors() {
           width="100%"
           height="100%"
           fontSize={'1em'}
+          onChange={(e) => setWaccText(e)}
         />
 
       </GridItem>
@@ -65,6 +82,7 @@ export default function Editors() {
 
       <GridItem rowSpan={2} colSpan={[2, 1]}>
         <AceEditor
+          value={assemblyText}
           mode="assembly_x86"
           theme="dracula"
           name="Some Editor"
