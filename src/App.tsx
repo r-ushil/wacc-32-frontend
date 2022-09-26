@@ -13,6 +13,7 @@ import { ColorModeSwitcher } from "./components/ColorModeSwitcher"
 import { Logo } from "./components/Logo"
 import init, { compile } from "wacc_32";
 import { useEffect, useState } from "react";
+import Editor from "./components/editors";
 
 
 export function App() {
@@ -38,6 +39,9 @@ export function App() {
             </Link>
           </VStack>
         </Grid>
+      </Box>
+      <Box w={1000} h={1000}>
+        <Editor />
       </Box>
     </ChakraProvider>
   )
