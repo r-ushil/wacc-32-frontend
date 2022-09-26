@@ -41,7 +41,7 @@ export default function Editors() {
     <Grid
       h='100vh'
       w='100vw'
-      templateRows='repeat(4, 1fr)'
+      templateRows='repeat(3, 1fr)'
       templateColumns='repeat(2, 1fr)'
       gap={4}
     >
@@ -49,7 +49,7 @@ export default function Editors() {
         <ReactTerminal commands={commands} theme='dracula' showControlBar={false} />
       </GridItem>
 
-      <GridItem rowSpan={3}>
+      <GridItem rowSpan={2} colSpan={[2, 1]}>
         <AceEditor
           mode="julia"
           theme="dracula"
@@ -63,7 +63,7 @@ export default function Editors() {
       </GridItem>
 
 
-      <GridItem rowSpan={3}>
+      <GridItem rowSpan={2} colSpan={[2, 1]}>
         <AceEditor
           mode="assembly_x86"
           theme="dracula"
