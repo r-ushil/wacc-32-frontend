@@ -9,7 +9,8 @@ import { useState } from "react";
 import init, { compile } from "wacc_32";
 
 import { ReactTerminal } from "react-terminal";
-import { ChakraProvider, Grid, GridItem, Text, theme } from "@chakra-ui/react";
+import { ChakraProvider, Grid, GridItem, Text } from "@chakra-ui/react";
+import theme from "./theme";
 import WACCExample from "./waccExample";
 
 export function App() {
@@ -57,56 +58,60 @@ export function App() {
 
   return (
     <ChakraProvider theme={theme}>
-    <Grid
-      h='100vh'
-      w='100vw'
-      templateRows='repeat(5, 1fr)'
-      templateColumns='repeat(2, 1fr)'
-      gap={4}
-    >
-      <GridItem colSpan={2} rowSpan={2}>
-        <ReactTerminal
-          commands={commands} 
-          theme='dracula' 
-          showControlBar={false} 
-          errorMessage={'command not found'} 
-          welcomeMessage={<>Welcome to the WACC Compiler! Type "help" for the list of commands. <br/><br/> </>} />
-      </GridItem>
+      <Grid
+        h='100vh'
+        w='100vw'
+        templateRows='repeat(5, 1fr)'
+        templateColumns='repeat(2, 1fr)'
+        gap={4}
+        backgroundColor='#1A202C'
+        className={'color-scheme: dark'}
+      >
+        <GridItem colSpan={2} rowSpan={2} >
+          <ReactTerminal
+            commands={commands}
+            theme='dracula'
+            showControlBar={false}
+            errorMessage={'command not found'}
+            welcomeMessage={<>Welcome to the WACC Compiler! Type "help" for the list of commands. <br /><br /> </>}
+          />
+        </GridItem>
 
-      <GridItem rowSpan={3} colSpan={[2, 1]}>
-        <AceEditor
-          value={waccText}
-          mode="julia"
-          theme="dracula"
-          name="Some Editor"
-          editorProps={{ $blockScrolling: true }}
-          width="100%"
-          height="100%"
-          fontSize={'1em'}
-          onChange={(e) => setWaccText(e)}
-        />
+        <GridItem rowSpan={3} colSpan={[2, 1]} >
+          <AceEditor
+            value={waccText}
+            mode="julia"
+            theme="dracula"
+            name="Some Editor"
+            editorProps={{ $blockScrolling: true }}
+            width="100%"
+            height="100%"
+            fontSize={'1em'}
+            onChange={(e) => setWaccText(e)}
 
-      </GridItem>
+          />
 
-
-      <GridItem rowSpan={3} colSpan={[2, 1]}>
-        <AceEditor
-          value={assemblyText}
-          mode="assembly_x86"
-          theme="dracula"
-          name="Some Editor"
-          editorProps={{ $blockScrolling: true }}
-          fontSize={'1em'}
-          width="100%"
-          height="100%"
-
-          readOnly={true}
-        />
-      </GridItem>
+        </GridItem>
 
 
+        <GridItem rowSpan={3} colSpan={[2, 1]}>
+          <AceEditor
+            value={assemblyText}
+            mode="assembly_x86"
+            theme="dracula"
+            name="Some Editor"
+            editorProps={{ $blockScrolling: true }}
+            fontSize={'1em'}
+            width="100%"
+            height="100%"
 
-    </Grid>
+            readOnly={true}
+          />
+        </GridItem>
+
+
+
+      </Grid>
     </ChakraProvider>
   );
 }

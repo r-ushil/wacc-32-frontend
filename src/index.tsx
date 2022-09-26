@@ -3,6 +3,7 @@ import * as React from "react"
 import * as ReactDOM from "react-dom/client"
 import { TerminalContextProvider } from "react-terminal"
 import { App } from "./App"
+import theme from "./theme"
 
 
 const container = document.getElementById("root")
@@ -11,9 +12,9 @@ const root = ReactDOM.createRoot(container)
 
 root.render(
   <React.StrictMode>
-    <ColorModeScript />
+    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
     <TerminalContextProvider>
-    <App />
+      <App />
     </TerminalContextProvider>
   </React.StrictMode>,
 )
