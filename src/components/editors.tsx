@@ -55,7 +55,6 @@ export default function Editors() {
           theme="dracula"
           name="Some Editor"
           editorProps={{ $blockScrolling: true }}
-          maxLines={100}
           width="100%"
           height="100%"
           fontSize={'1em'}
