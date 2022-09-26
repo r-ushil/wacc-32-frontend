@@ -15,41 +15,19 @@ export default function Editors() {
 
   const [waccText, setWaccText] = useState("# write your .wacc code here!")
   const [assemblyText, setAssemblyText] = useState("assembly output will be displayed here.")
-  const [terminalText, setTerminalText] = useState("")
-
-
-
-  /*
-
-  type compile in the terminal, press enter
-  get terminalText
-  run compile wasm function
-  paste assemblyText
-  paste terminalText
-
-  type clear in the terminal, press enter
-  set terminalText to ""
-
-  type help in the terminal, press enter
-  paste help const into terminal text
-
-  */
-
-  const callCompile = () => {
-
-    init().then(() => {
-      const output = compile(waccText, false)
-      setAssemblyText(output.asm_output)
-      setTerminalText(output.terminal_output)
-    })
-
-    return terminalText
-         
-  }
 
   const commands = {
     whoami: "rushil",
-    compile: callCompile(),
+    compile: (() => {
+
+      const res = init().then(() => {
+        const output = compile(waccText, false)
+        setAssemblyText(output.asm_output)
+        return output.terminal_output
+      })
+
+      return res
+    }),
   };
 
   return (
