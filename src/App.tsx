@@ -51,6 +51,8 @@ export function App() {
     source: (() => (window.open("https://github.com/r-ushil/wacc-32"))),
     examples: (() => (window.open("https://github.com/r-ushil/wacc-32/tree/master/test_integration/wacc_examples"))),
     details: "coming soon!",
+    ls: "sneaky....",
+    sudo: "nice try :)",
   };
 
   return (
