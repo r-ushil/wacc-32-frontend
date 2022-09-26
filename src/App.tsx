@@ -15,7 +15,7 @@ import init, { compile } from "wacc_32";
 import { useEffect, useState } from "react";
 
 
-export default function App() {
+export function App() {
 
   return (
     <ChakraProvider theme={theme}>
